@@ -8,7 +8,7 @@ class ButtonWidget extends StatelessWidget {
   final VoidCallback onClickedLong;
 
   const ButtonWidget({
-    required Key key,
+    Key? key,
     required this.text,
     required this.onClicked,
     required this.onClickedLong,

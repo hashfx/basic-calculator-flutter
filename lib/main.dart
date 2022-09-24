@@ -71,13 +71,13 @@ class _MainPageState extends State<MainPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              '0',
+              state.equation,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: Colors.white, fontSize: 36),
             ),
             const SizedBox(height: 24),
             Text(
-              '0',
+              state.result,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: Colors.grey, fontSize: 18),
             ),
@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           children: <Widget>[
             buildButtonRow('AC', '<', '', '÷'),
-            buildButtonRow('7', '8', '9', '⨯'),
+            buildButtonRow('7', '8', '9', 'x'),
             buildButtonRow('4', '5', '6', '-'),
             buildButtonRow('1', '2', '3', '+'),
             buildButtonRow('0', '.', '', '='),

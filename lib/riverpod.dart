@@ -46,5 +46,7 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
 
     // evaluate expression and get result
     final result = '${exp.evaluate(EvaluationType.REAL, model)}';
+    // override state of result member from model/calculator.dart to our current state
+    state = state.copy(result: result);
   }
 }

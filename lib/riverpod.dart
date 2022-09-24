@@ -37,6 +37,18 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
     calculate();
   }
 
+  // delete text
+  void delete() {
+    final equation = state.equation; // get equation
+    // if equation is empty, no need to delete anything 😄
+    if (equation.isNotEmpty) {
+      // all text except last character
+      final newEquation = equation.substring(0, equation.length - 1);
+      // update current equation
+      state = state.copy(equation: newEquation);
+    }
+  }
+
   void calculate() {
     // replace (x, ÷) to (*, /)
     final expression = state.equation.replaceAll('x', '*').replaceAll('÷', '/');

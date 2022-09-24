@@ -71,12 +71,14 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // displays equation
               Text(
                 state.equation,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: Colors.white, fontSize: 36, height: 1),
               ),
               const SizedBox(height: 24),
+              // displays result
               Text(
                 state.result,
                 overflow: TextOverflow.ellipsis,
@@ -131,8 +133,13 @@ class _MainPageState extends State<MainPage> {
     // calculator.append(buttonText);
 
     switch (buttonText) {
+      // evaluate expression
       case '=':
-        calculator.equals(); // evaluate expression
+        calculator.equals();
+        break;
+      // clear backspace
+      case '<':
+        calculator.delete();
         break;
       default:
         calculator.append(buttonText); // append to previous text

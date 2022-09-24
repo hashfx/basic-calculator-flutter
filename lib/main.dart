@@ -62,6 +62,7 @@ class _MainPageState extends State<MainPage> {
       );
 
   Widget buildResult() => Consumer(
+    // update equation and result UI w.r.t. user input
     builder: ((context, watch, child) {
       final state = watch(calculatorProvider.state);
     return Container(

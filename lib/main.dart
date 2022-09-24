@@ -74,7 +74,7 @@ class _MainPageState extends State<MainPage> {
             Text(
               state.equation,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.white, fontSize: 36),
+              style: TextStyle(color: Colors.white, fontSize: 36, height: 1),
             ),
             const SizedBox(height: 24),
             Text(

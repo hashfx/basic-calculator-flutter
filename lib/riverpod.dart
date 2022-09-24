@@ -31,4 +31,20 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
     // change equation on input area and override with new value
     state = state.copy(equation: equation);
   }
+
+  // = button
+  void equals() {
+    calculate();
+  }
+
+  void calculate() {
+    // replace (x, ÷) to (*, /)
+    final expression = state.equation.replaceAll('x', '*').replaceAll('÷', '/');
+    // parse expression
+    final exp = Parser().parse(expression);
+    final model = ContextModel();
+
+    // evaluate expression and get result
+    final result = '${exp.evaluate(EvaluationType.REAL, model)}';
+  }
 }

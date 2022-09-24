@@ -1,3 +1,4 @@
+import 'package:calculator_flutter/riverpod.dart';
 import 'package:calculator_flutter/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator_flutter/colors.dart';
@@ -60,7 +61,10 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
-  Widget buildResult() => Container(
+  Widget buildResult() => Consumer(
+    builder: ((context, watch, child) {
+      final state = watch(calculatorProvider.state);
+    return Container(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -80,6 +84,7 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
       );
+      }));
 
   Widget buildButtons() => Container(
         padding: EdgeInsets.all(16),
@@ -111,11 +116,17 @@ class _MainPageState extends State<MainPage> {
         children: row
             .map((text) => ButtonWidget(
                   text: text,
-                  onClicked: () => print(text),
+                  onClicked: () => onClickedButton(text),
                   onClickedLong: () => print(text),
                 ))
             .toList(),
       ),
     );
+  }
+
+  void onClickedButton(String buttonText) {
+    final calculator = context.read(calculatorProvider);
+
+    calculator.append(buttonText);
   }
 }

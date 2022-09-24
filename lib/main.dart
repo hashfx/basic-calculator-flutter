@@ -62,29 +62,29 @@ class _MainPageState extends State<MainPage> {
       );
 
   Widget buildResult() => Consumer(
-    // update equation and result UI w.r.t. user input
-    builder: ((context, watch, child) {
-      final state = watch(calculatorProvider.state);
-    return Container(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              state.equation,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.white, fontSize: 36, height: 1),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              state.result,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.grey, fontSize: 18),
-            ),
-          ],
-        ),
-      );
+          // update equation and result UI w.r.t. user input
+          builder: ((context, watch, child) {
+        final state = watch(calculatorProvider.state);
+        return Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                state.equation,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.white, fontSize: 36, height: 1),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                state.result,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.grey, fontSize: 18),
+              ),
+            ],
+          ),
+        );
       }));
 
   Widget buildButtons() => Container(
@@ -128,6 +128,15 @@ class _MainPageState extends State<MainPage> {
   void onClickedButton(String buttonText) {
     final calculator = context.read(calculatorProvider);
 
-    calculator.append(buttonText);
+    // calculator.append(buttonText);
+
+    switch (buttonText) {
+      case '=':
+        calculator.equals(); // evaluate expression
+        break;
+      default:
+        calculator.append(buttonText); // append to previous text
+        break;
+    }
   }
 }

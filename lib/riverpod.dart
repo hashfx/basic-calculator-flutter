@@ -45,7 +45,7 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
       }
     }();
     // change equation on input area and override with new value
-    state = state.copy(equation: equation);
+    state = state.copy(equation: equation, shouldAppend: true);
   }
 
   // = button

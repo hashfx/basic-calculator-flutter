@@ -44,21 +44,37 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
     if (equation.isNotEmpty) {
       // all text except last character
       final newEquation = equation.substring(0, equation.length - 1);
-      // update current equation
-      state = state.copy(equation: newEquation);
+
+      if (newEquation.isEmpty) {
+        // if there is no number
+        reset(); // reset the screen [0 on equation and result]
+      } else {
+        // update current equation
+        state = state.copy(equation: newEquation);
+        // update and calculate result along with equation
+        calculate();
+      }
     }
+  }
+
+  void reset() {
+    // set equation and result to 0
+    final equation = '0';
+    final result = '0';
   }
 
   void calculate() {
     // replace (x, ÷) to (*, /)
     final expression = state.equation.replaceAll('x', '*').replaceAll('÷', '/');
-    // parse expression
-    final exp = Parser().parse(expression);
-    final model = ContextModel();
+    try {
+      // parse expression
+      final exp = Parser().parse(expression);
+      final model = ContextModel();
 
-    // evaluate expression and get result
-    final result = '${exp.evaluate(EvaluationType.REAL, model)}';
-    // override state of result member from model/calculator.dart to our current state
-    state = state.copy(result: result);
+      // evaluate expression and get result
+      final result = '${exp.evaluate(EvaluationType.REAL, model)}';
+      // override state of result member from model/calculator.dart to our current state
+      state = state.copy(result: result);
+    } catch (e) {}
   }
 }

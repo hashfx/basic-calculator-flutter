@@ -10,6 +10,17 @@ final calculatorProvider =
 class CalculatorNotifier extends StateNotifier<Calculator> {
   CalculatorNotifier() : super(Calculator());
 
+  // after press '=': input new equation instead of appending to previous equation
+  void resetResult() {
+    final equation = state.result; // current result and put it to equation
+
+    // update state
+    state = state.copy(
+      equation: equation,
+      shouldAppend: false, // do not append any further characters to equation
+    );
+  }
+
   // executes every time user click buttons
   void append(String buttonText) {
     // get equation
@@ -22,19 +33,20 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
             state.equation.substring(0, state.equation.length - 1);
 
         return newEquation + buttonText;
-      } else {}
-
-      // append current text to new text
-      // if screen has 0, replace 0 by new text
-      return state.equation == '0' ? buttonText : state.equation + buttonText;
+      } else {
+        // append current text to new text
+        // if screen has 0, replace 0 by new text
+        return state.equation == '0' ? buttonText : state.equation + buttonText;
+      }
+      // change equation on input area and override with new value
     }();
-    // change equation on input area and override with new value
     state = state.copy(equation: equation);
   }
 
   // = button
   void equals() {
-    calculate();
+    calculate(); // evaluate expression
+    resetResult(); // input as new equation instead of appending to previous equation
   }
 
   // delete text

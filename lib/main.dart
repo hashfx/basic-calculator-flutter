@@ -120,7 +120,7 @@ class _MainPageState extends State<MainPage> {
             .map((text) => ButtonWidget(
                   text: text,
                   onClicked: () => onClickedButton(text),
-                  onClickedLong: () => print(text),
+                  onClickedLong: () => onLongClickedButton(text),
                 ))
             .toList(),
       ),
@@ -133,6 +133,10 @@ class _MainPageState extends State<MainPage> {
     // calculator.append(buttonText);
 
     switch (buttonText) {
+      // reset screen
+      case 'AC':
+        calculator.reset();
+        break;
       // evaluate expression
       case '=':
         calculator.equals();
@@ -144,6 +148,17 @@ class _MainPageState extends State<MainPage> {
       default:
         calculator.append(buttonText); // append to previous text
         break;
+    }
+  }
+
+  // on long press, acts like AC button
+  void onLongClickedButton(String text) {
+    // reference to calculator programme
+    final calculator = context.read(calculatorProvider);
+
+    // check if clicked text is <
+    if (text == '<') {
+      calculator.reset();
     }
   }
 }

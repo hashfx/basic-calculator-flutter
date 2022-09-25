@@ -1,5 +1,11 @@
 # calculator_flutter
 
+### run flutter app without null safety
+
+```dart
+flutter run --no-sound-null-safety -d chrome
+```
+
 A new Flutter project.
 
 ## Getting Started

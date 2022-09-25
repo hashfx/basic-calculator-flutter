@@ -43,13 +43,8 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
                 buttonText // if operator: append text after equation
             : buttonText; // if !operator: replace while equation with new number
       }
-      // } else {
-      //   // append current text to new text
-      //   // if screen has 0, replace 0 by new text
-      //   return state.equation == '0' ? buttonText : state.equation + buttonText;
-      // }
-      // change equation on input area and override with new value
     }();
+    // change equation on input area and override with new value
     state = state.copy(equation: equation);
   }
 

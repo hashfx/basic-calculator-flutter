@@ -33,11 +33,21 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
             state.equation.substring(0, state.equation.length - 1);
 
         return newEquation + buttonText;
-      } else {
-        // append current text to new text
-        // if screen has 0, replace 0 by new text
+      } else if (state.shouldAppend) {
+        // append to current equation
         return state.equation == '0' ? buttonText : state.equation + buttonText;
+      } else {
+        // if we don't want char to be appended
+        return Utils.isOperator(buttonText) // check if next text is an operator
+            ? state.equation +
+                buttonText // if operator: append text after equation
+            : buttonText; // if !operator: replace while equation with new number
       }
+      // } else {
+      //   // append current text to new text
+      //   // if screen has 0, replace 0 by new text
+      //   return state.equation == '0' ? buttonText : state.equation + buttonText;
+      // }
       // change equation on input area and override with new value
     }();
     state = state.copy(equation: equation);

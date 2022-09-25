@@ -37,7 +37,7 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
         // append to current equation
         return state.equation == '0' ? buttonText : state.equation + buttonText;
       } else {
-        // if we don't want char to be appended
+        // if operator is pressed instead of char, append it to current equation and not make it new
         return Utils.isOperator(buttonText) // check if next text is an operator
             ? state.equation +
                 buttonText // if operator: append text after equation

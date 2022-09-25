@@ -61,6 +61,8 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
     // set equation and result to 0
     final equation = '0';
     final result = '0';
+    // new (updated) state object
+    state = state.copy(equation: equation, result: result);
   }
 
   void calculate() {

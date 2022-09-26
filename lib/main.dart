@@ -5,7 +5,7 @@ import 'package:calculator_flutter/colors.dart';
 import 'package:calculator_flutter/utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prv;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,10 +62,10 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
-  Widget buildResult() => Consumer(
+  Widget buildResult() => prv.Consumer(
           // update equation and result UI w.r.t. user input
-          builder: ((context, watch, child) {
-        final state = watch(calculatorProvider);
+          builder: ((context, WidgetRef ref, child) {
+        final state = ref.watch(calculatorProvider);
         return Container(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -155,7 +155,7 @@ class _MainPageState extends State<MainPage> {
   // on long press, acts like AC button
   void onLongClickedButton(String text) {
     // reference to calculator programme
-    final calculator = context.Provider.of(calculatorProvider);
+    final calculator = context.read();
 
     // check if clicked text is <
     if (text == '<') {
